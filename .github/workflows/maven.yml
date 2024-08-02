@@ -29,3 +29,7 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package -DskipTests --file pom.xml
+    - name: Create Docker image
+      run: docker build . --file src/main/docker/Dockerfile.jvm --tag academy:$(date +%s)
+    - name: Confirming image was created
+      run: docker images | grep academy
