@@ -1,11 +1,38 @@
 name: Docker image Build
 description: Build Docker image
+inputs:
+  dockerfile_path:
+    description: "Path to the Dockerfile"
+    required: false
+    default: "src/main/docker/Dockerfile.jvm"
+  image_name:
+    description: "Image name"
+    required: false
+    default: "academy"
+  tag_name:
+    description: "Tag name"
+    required: false
+
 runs:
   using: composite
   steps:
-    - name: Create Docker image
-      run: docker build . --file src/main/docker/Dockerfile.jvm --tag academy:$(date +%s)
+    - name: Setting TAG
       shell: bash
+      run: |
+        if [ -z "${{ inputs.tag_name }}" ]; then
+          TAG=$(date +%s)
+        else
+          TAG=${{ inputs.tag_name }}
+        fi
+        echo "TAG=$TAG" >> $GITHUB_ENV
+    - name: Create Docker image
+      run: docker build . --file ${{ inputs.dockerfile_path }} --tag ${{ inputs.image_name }}:$TAG
+      shell: bash
+    - name: Export Docker Image Name
+      shell: bash
+      run: |
+        NAME=${{ inputs.image_name }}:$TAG
+        echo "DOCKER_IMAGE_NAME=$NAME" >> $GITHUB_ENV
     - name: Confirming image was created
-      run: docker images | grep academy
+      run: docker images | grep ${{ inputs.image_name }}
       shell: bash
