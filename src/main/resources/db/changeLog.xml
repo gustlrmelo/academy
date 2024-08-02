@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <include file="t_team.sql" relativeToChangelogFile="true"/>
+    <include file="t_team_member.sql" relativeToChangelogFile="true"/>
+    <include file="t_rack.sql" relativeToChangelogFile="true"/>
+    <include file="t_rack_asset.sql" relativeToChangelogFile="true"/>
+    <include file="t_booking.sql" relativeToChangelogFile="true"/>
+
+
+</databaseChangeLog>
