@@ -9,7 +9,7 @@ inputs:
   image_name:
     description: "Tag the current image with the docker username"
     required: false
-    default: $DOCKER_IMAGE_NAME:$TAG
+    default: $DOCKER_IMAGE_NAME
 
 runs:
   using: composite
