@@ -16,8 +16,12 @@ runs:
   steps:
     - name: Tag image
       shell: bash
-      run: docker tag ${{inputs.image_name}} ${{inputs.docker_username}}/dockeracademy:$TAG
+      run: |
+        echo image name: ${{inputs.image_name}}
+        echo docker username: ${{inputs.docker_username}}
+        echo tag: $TAG
+        docker tag ${{inputs.image_name}} ${{inputs.docker_username}}/dockeracademy:$TAG
 
     - name: Push image to Docker Hub
       shell: bash
-      run: docker push ${{ inputs.docker_username}}/dockeracademy:$TAG
+      run: docker push ${{inputs.docker_username}}/dockeracademy:$TAG
