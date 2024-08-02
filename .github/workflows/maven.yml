@@ -33,3 +33,4 @@ jobs:
       run: docker build . --file src/main/docker/Dockerfile.jvm --tag academy:$(date +%s)
     - name: Confirming image was created
       run: docker images | grep academy
+    -uses: gustlrmelo/academy/.github/actions/maven_build@master
